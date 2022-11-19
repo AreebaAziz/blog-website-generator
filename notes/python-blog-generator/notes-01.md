@@ -1,3 +1,43 @@
+# Python Blog Generator - Notes 01
+
+##### Nov 19, 2022
+
+Currently the Python script only works for one hard-coded file under `notes/`.
+
+I want to enable it to work for all `.md` files under `notes/`, including ones in subdirectories, while maintaining the file hierarchy. 
+
+I can create HTML files for each `.md` file. Then save it in the correct folder under `website/notes/`. 
+
+On the index page, I want to show the file system hierarchy, without having to run a server to display this file-system hierarchy. There are probably libraries that help you do this - to generate an HTML file that displays the file system hierarchy of a particular folder you specify, and open `.html` files as a page. 
+
+Current code:
+
+```python
+from pathlib import Path
+from markdown import markdown
+
+from template import main_page, note_page, notes_list_item
+
+page = ""
+content_md = Path('notes/notes-01.md').read_text()
+content_html = markdown(content_md, extensions=['fenced_code'])
+
+notes_list_item = notes_list_item.format(page_name="note_01", title="Note 01")
+note_page = note_page.format(title="Note 01", body=content_html)
+main_page = main_page.format(notes_list=notes_list_item) # todo replace with list of items
+
+main_page_f = open("website/index.html", "w")
+main_page_f.write(main_page)
+main_page_f.close()
+
+note_page_f = open("website/notes/note_01.html", "w")
+note_page_f.write(note_page)
+note_page_f.close()
+```
+
+After my work today, the script now looks like this:
+
+```python
 import os
 import sys
 from pathlib import Path
@@ -81,3 +121,5 @@ elif (args_len == 2):
 	main(sys.argv[1])
 else:
 	main()
+
+```

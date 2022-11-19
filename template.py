@@ -1,4 +1,4 @@
-main_page = """<!DOCTYPE html>
+index_page = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@ main_page = """<!DOCTYPE html>
     <title>My Notes</title>
 </head>
 <body>
-    <h1>My Notes</h1>
+    <h1>{page_title}</h1>
     <ul>
     	{notes_list}
     </ul>
@@ -15,7 +15,8 @@ main_page = """<!DOCTYPE html>
 </html>
 """
 
-notes_list_item = "<li><a href=\"notes/{page_name}.html\">{title}</a></li>"
+subdir_item = "<li><a href=\"{title}/index.html\">{title}/</a></li>"
+file_item = "<li><a href=\"{title}\">{title}</a></li>"
 
 note_page = """<!DOCTYPE html>
 <html lang="en">
@@ -30,6 +31,3 @@ note_page = """<!DOCTYPE html>
 </body>
 </html>
 """
-
-# title = "Note 01"
-# content = content_in_html
